@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.canvas {
+    margin: 25px auto;
+    width: 400px;
+    height: 500px;
+    position: relative;
+    background-color: black;
+}
+
+.tile {
+    width: 100px;
+    height: 125px;
+    position: absolute;
+    border: 1px solid black;
+    background-color: aqua;
+}
