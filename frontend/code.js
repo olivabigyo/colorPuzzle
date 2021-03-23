@@ -1,3 +1,16 @@
+const playground = document.getElementById('canvas')
+const game = { "w": 4, "h": 5 }
+const tilewidth = 400 / game.w;
+const tileheight = 500 / game.h;
+
+// Creating DOM elements for game object
+for (let i = 0; i < (game.w)*(game.h); i++) {
+    const elem = document.createElement('div');
+    elem.classList.add('tile');
+    elem.style.width = `${tilewidth}px`;
+    elem.style.height = `${tileheight}px`;
+    playground.appendChild(elem);
+}
 
 const tiles = document.querySelectorAll('.tile');
 
@@ -14,8 +27,8 @@ const colorColumnSteps = [15, 25, -20];
 // Initialize tiles
 for (const tile of tiles) {
     // position of the tile
-    tile.style.top = `${r * 125}px`;
-    tile.style.left = `${c * 100}px`;
+    tile.style.top = `${r * tileheight}px`;
+    tile.style.left = `${c * tilewidth}px`;
     console.log(r, c);
     // color of the tile
     const color = [

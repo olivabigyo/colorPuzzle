@@ -6,19 +6,18 @@
     box-sizing: border-box;
 }
 
-.canvas {
+#canvas {
     margin: 25px auto;
     width: 400px;
     height: 500px;
     position: relative;
-    /* background-color: black; */
 }
 
 .tile {
     width: 100px;
     height: 125px;
     position: absolute;
-    border: 1px solid black;
+    border: 1px solid white;
     background-color: aqua;
     transition: all .5s;
 }
