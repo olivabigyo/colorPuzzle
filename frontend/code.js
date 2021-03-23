@@ -21,12 +21,20 @@ let selected = null;
 
 for (const tile of tiles) {
     tile.addEventListener('click', () => {
-        console.log('clicked');
+        // console.log('clicked');
         if (selected) {
             selected.classList.toggle('selected');
-            // TODO: clicked tile and selected tile change positions
+            // clicked tile and selected tile change positions
+            const t = tile.style.top;
+            tile.style.top = selected.style.top;
+            selected.style.top = t;
+            const l = tile.style.left;
+            tile.style.left = selected.style.left;
+            selected.style.left = l;
+            // reset selection
             selected = null;
         } else {
+            // set selection
             selected = tile;
             tile.classList.toggle('selected');
         }
