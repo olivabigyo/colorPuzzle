@@ -11,7 +11,7 @@
     width: 400px;
     height: 500px;
     position: relative;
-    background-color: black;
+    /* background-color: black; */
 }
 
 .tile {
@@ -20,4 +20,10 @@
     position: absolute;
     border: 1px solid black;
     background-color: aqua;
+    transition: all .5s;
+}
+
+.selected {
+    transform: scale(1.1);
+    z-index: 1000;
 }

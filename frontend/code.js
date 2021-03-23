@@ -16,8 +16,19 @@ for (const tile of tiles) {
 }
 
 // Add Event listeners
+// Tiles are selectable
+let selected = null;
+
 for (const tile of tiles) {
     tile.addEventListener('click', () => {
         console.log('clicked');
+        if (selected) {
+            selected.classList.toggle('selected');
+            // TODO: clicked tile and selected tile change positions
+            selected = null;
+        } else {
+            selected = tile;
+            tile.classList.toggle('selected');
+        }
     });
 }
