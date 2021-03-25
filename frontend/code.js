@@ -1,71 +1,70 @@
-const playground = document.getElementById('canvas')
-const game = { "w": 4, "h": 5 }
-const tilewidth = 400 / game.w;
-const tileheight = 500 / game.h;
+'use strict';
 
-// Creating DOM elements for game object
-for (let i = 0; i < (game.w)*(game.h); i++) {
-    const elem = document.createElement('div');
-    elem.classList.add('tile');
-    elem.style.width = `${tilewidth}px`;
-    elem.style.height = `${tileheight}px`;
-    playground.appendChild(elem);
-}
+const playground = document.getElementById('canvas');
 
-const tiles = document.querySelectorAll('.tile');
+const game = {
+    "w": 2,
+    "h": 2,
+    "tiles": [
+        { "x": 0, "y": 1, "color": "rgb(30, 150, 220)" },
+        { "x": 1, "y": 0, "color": "rgb(25, 165, 230)" },
+        { "x": 1, "y": 1, "color": "rgb(45, 175, 200)" },
+        { "x": 0, "y": 0, "color": "rgb(10, 140, 250)" }
+    ]
+};
 
-let r = 0;
-let c = 0;
+function initGame(game) {
+    const tilewidth = 400 / game.w;
+    const tileheight = 500 / game.h;
 
-// Static coloring
-// color of the (0,0) tile
-const colorOrigin = [10, 140, 250];
-// rgb color steps
-const colorRowSteps = [20, 10, -30];
-const colorColumnSteps = [15, 25, -20];
+    // Creating DOM elements for game object
+    for (const tile of game.tiles) {
+        const elem = document.createElement('div');
+        elem.classList.add('tile');
+        elem.style.width = `${tilewidth}px`;
+        elem.style.height = `${tileheight}px`;
+        elem.style.backgroundColor = tile.color;
+        tile.elem = elem;
+        playground.appendChild(elem);
+    }
 
-// Initialize tiles
-for (const tile of tiles) {
-    // position of the tile
-    tile.style.top = `${r * tileheight}px`;
-    tile.style.left = `${c * tilewidth}px`;
-    console.log(r, c);
-    // color of the tile
-    const color = [
-        colorOrigin[0] + colorRowSteps[0] * r + colorColumnSteps[0] * c, //red
-        colorOrigin[1] + colorRowSteps[1] * r + colorColumnSteps[1] * c, //green
-        colorOrigin[2] + colorRowSteps[2] * r + colorColumnSteps[2] * c  //blue
-    ];
-    tile.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+    for (let r = 0; r < game.h; r++) {
+        for (let c = 0; c < game.w; c++) {
+            const tile = game.tiles[r * game.w + c];
+            tile.elem.style.top = `${r * tileheight}px`;
+            tile.elem.style.left = `${c * tilewidth}px`;
+        }
+    }
 
-    c++;
-    if (c >= 4) {
-        r++; c = 0;
+    // Add Event listeners:
+    // Tiles are selectable and change position
+    let selected = null;
+
+    for (const tile of game.tiles) {
+        tile.elem.addEventListener('click', () => {
+            // console.log('clicked');
+            if (selected) {
+                selected.elem.classList.toggle('selected');
+                // clicked tile and selected tile change positions
+                swap(selected, tile);
+                // reset selection
+                selected = null;
+            } else {
+                // set selection
+                selected = tile;
+                tile.elem.classList.toggle('selected');
+            }
+        });
     }
 }
 
-// Add Event listeners:
-// Tiles are selectable and change position
-let selected = null;
-
-for (const tile of tiles) {
-    tile.addEventListener('click', () => {
-        // console.log('clicked');
-        if (selected) {
-            selected.classList.toggle('selected');
-            // clicked tile and selected tile change positions
-            const t = tile.style.top;
-            tile.style.top = selected.style.top;
-            selected.style.top = t;
-            const l = tile.style.left;
-            tile.style.left = selected.style.left;
-            selected.style.left = l;
-            // reset selection
-            selected = null;
-        } else {
-            // set selection
-            selected = tile;
-            tile.classList.toggle('selected');
-        }
-    });
+function swap(selected, tile) {
+    const t = tile.elem.style.top;
+    tile.elem.style.top = selected.elem.style.top;
+    selected.elem.style.top = t;
+    const l = tile.elem.style.left;
+    tile.elem.style.left = selected.elem.style.left;
+    selected.elem.style.left = l;
 }
+
+initGame(game);
