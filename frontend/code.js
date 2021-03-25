@@ -47,6 +47,8 @@ function initGame(game) {
     for (let r = 0; r < game.h; r++) {
         for (let c = 0; c < game.w; c++) {
             const tile = game.tiles[r * game.w + c];
+            tile.cx = c;
+            tile.cy = r;
             tile.elem.style.top = `${r * tileheight}px`;
             tile.elem.style.left = `${c * tilewidth}px`;
         }
@@ -65,6 +67,12 @@ function initGame(game) {
                 swap(selected, tile);
                 // reset selection
                 selected = null;
+                if (isWin(game)) {
+                    console.log("You won");
+                    setTimeout(() => { alert('Hurray! You won') }, 500);
+                } else {
+                    console.log("Not yet");
+                }
             } else {
                 // set selection
                 selected = tile;
@@ -81,4 +89,19 @@ function swap(selected, tile) {
     const l = tile.elem.style.left;
     tile.elem.style.left = selected.elem.style.left;
     selected.elem.style.left = l;
+    const cx = tile.cx;
+    tile.cx = selected.cx;
+    selected.cx = cx;
+    const cy = tile.cy;
+    tile.cy = selected.cy;
+    selected.cy = cy;
+}
+
+function isWin(game) {
+    for (const tile of game.tiles) {
+        if (tile.cx != tile.x || tile.cy != tile.y) {
+            return false;
+        }
+    }
+    return true;
 }
