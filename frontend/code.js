@@ -64,7 +64,7 @@ function initGame(game) {
             if (selected) {
                 selected.elem.classList.toggle('selected');
                 // clicked tile and selected tile change positions
-                swap(selected, tile);
+                swapTiles(selected, tile);
                 // reset selection
                 selected = null;
                 if (isWin(game)) {
@@ -82,19 +82,17 @@ function initGame(game) {
     }
 }
 
-function swap(selected, tile) {
-    const t = tile.elem.style.top;
-    tile.elem.style.top = selected.elem.style.top;
-    selected.elem.style.top = t;
-    const l = tile.elem.style.left;
-    tile.elem.style.left = selected.elem.style.left;
-    selected.elem.style.left = l;
-    const cx = tile.cx;
-    tile.cx = selected.cx;
-    selected.cx = cx;
-    const cy = tile.cy;
-    tile.cy = selected.cy;
-    selected.cy = cy;
+function swap(a, b, ...keys) {
+    for (const key of keys) {
+        const x = a[key];
+        a[key] = b[key];
+        b[key] = x;
+    }
+}
+
+function swapTiles(selected, tile) {
+    swap(selected.elem.style, tile.elem.style, 'top', 'left');
+    swap(selected, tile, 'cx', 'cy');
 }
 
 function isWin(game) {
