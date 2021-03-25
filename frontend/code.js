@@ -2,16 +2,32 @@
 
 const playground = document.getElementById('canvas');
 
-const game = {
-    "w": 2,
-    "h": 2,
-    "tiles": [
-        { "x": 0, "y": 1, "color": "rgb(30, 150, 220)" },
-        { "x": 1, "y": 0, "color": "rgb(25, 165, 230)" },
-        { "x": 1, "y": 1, "color": "rgb(45, 175, 200)" },
-        { "x": 0, "y": 0, "color": "rgb(10, 140, 250)" }
-    ]
-};
+const apiEndpoint = 'http://localhost/colorPuzzle/backend/server.php';
+
+async function getGame() {
+    try {
+        const response = await fetch(apiEndpoint);
+
+        if (!response.ok) {
+            console.log(`Fetch returned with: ${response.status} (${response.statusText})`);
+            return;
+        }
+
+        const data = await response.json();
+
+        if (!data.game) {
+            console.log('Response contains no game field');
+            return;
+        }
+        console.log(data.game);
+        initGame(data.game);
+
+    } catch (exception) {
+        console.log('Error: ' + exception);
+    }
+}
+
+getGame();
 
 function initGame(game) {
     const tilewidth = 400 / game.w;
@@ -66,5 +82,3 @@ function swap(selected, tile) {
     tile.elem.style.left = selected.elem.style.left;
     selected.elem.style.left = l;
 }
-
-initGame(game);
