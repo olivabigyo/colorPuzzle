@@ -18,10 +18,39 @@ $templates = array(
 $w = $templates[$size]['w'];
 $h = $templates[$size]['h'];
 
+class ColorVector
+{
+    public $hue;
+    public $sat;
+    public $lit;
+
+    function __construct($h, $s, $l)
+    {
+        $this->hue = $h;
+        $this->sat = $s;
+        $this->lit = $l;
+    }
+
+    public function __toString()
+    {
+        return "hsl(" . $this->hue . ", " . $this->sat . "%, " . $this->lit . "%)";
+    }
+
+    public static function generateVertex()
+    {
+        $hue = rand(0, 360);
+        $saturation = rand(70, 100);
+        $lightness = rand(30, 70);
+        return  new ColorVector($hue, $saturation, $lightness);
+    }
+}
+
+
 // Static colors - for now
-$colorOrigin = [120, 100, 50];
-$colorRowSteps = [10, -5, -3];
-$colorColumnSteps = [-15, -3, 3];
+// $colorOrigin = new ColorVector(120, 100, 50);
+$colorOrigin = ColorVector::generateVertex();
+$colorRowSteps = new ColorVector(10, -5, -3);
+$colorColumnSteps = new ColorVector(-15, -3, 3);
 
 $list = array();
 
@@ -29,13 +58,14 @@ for ($y = 0; $y < $h; $y++) {
     for ($x = 0; $x < $w; $x++) {
         // the right position of the tile
         $tile = array("x" => $x, "y" => $y);
-        $color = array(
-            $colorOrigin[0] + $colorRowSteps[0] * $y + $colorColumnSteps[0] * $x, //red
-            $colorOrigin[1] + $colorRowSteps[1] * $y + $colorColumnSteps[1] * $x, //green
-            $colorOrigin[2] + $colorRowSteps[2] * $y + $colorColumnSteps[2] * $x  //blue
+        $color = new ColorVector(
+            $colorOrigin->hue + $colorRowSteps->hue * $y + $colorColumnSteps->hue * $x,
+            $colorOrigin->sat + $colorRowSteps->sat * $y + $colorColumnSteps->sat * $x,
+            $colorOrigin->lit + $colorRowSteps->lit * $y + $colorColumnSteps->lit * $x
         );
         // color of the tile
-        $tile['color'] = "hsl(" . $color[0] . ", " . $color[1] . "%, " . $color[2] . "%)";
+        // $tile['color'] = "" . $color;  //converting to string
+        $tile['color'] = strval($color);  //converting to string too
         $list[] = $tile;
     }
 }
