@@ -49,8 +49,8 @@ class ColorVector
 // Static colors - for now
 // $colorOrigin = new ColorVector(120, 100, 50);
 $colorOrigin = ColorVector::generateVertex();
-$colorRowSteps = new ColorVector(10, -5, -3);
-$colorColumnSteps = new ColorVector(-15, -3, 3);
+$colorRowSteps = new ColorVector(rand(-20, 20), -5, -3);
+$colorColumnSteps = new ColorVector(rand(-20, 20), -3, 3);
 
 $list = array();
 
