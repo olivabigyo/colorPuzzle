@@ -72,26 +72,30 @@ function initGame(game) {
     let selected = null;
 
     for (const tile of game.tiles) {
-        tile.elem.addEventListener('click', () => {
-            // console.log('clicked');
-            if (selected) {
-                selected.elem.classList.toggle('selected');
-                // clicked tile and selected tile change positions
-                swapTiles(selected, tile);
-                // reset selection
-                selected = null;
-                if (isWin(game)) {
-                    console.log("You won");
-                    setTimeout(() => { alert('Hurray! You won') }, 500);
+        if (!tile.pinned) {
+            tile.elem.addEventListener('click', () => {
+                // console.log('clicked');
+                if (selected) {
+                    selected.elem.classList.toggle('selected');
+                    // clicked tile and selected tile change positions
+                    swapTiles(selected, tile);
+                    // reset selection
+                    selected = null;
+                    if (isWin(game)) {
+                        console.log("You won");
+                        setTimeout(() => { alert('Hurray! You won') }, 500);
+                    } else {
+                        console.log("Not yet");
+                    }
                 } else {
-                    console.log("Not yet");
+                    // set selection
+                    selected = tile;
+                    tile.elem.classList.toggle('selected');
                 }
-            } else {
-                // set selection
-                selected = tile;
-                tile.elem.classList.toggle('selected');
-            }
-        });
+            });
+        } else {
+            tile.elem.classList.add('pinned');
+        }
     }
 }
 

@@ -70,8 +70,14 @@ for ($y = 0; $y < $h; $y++) {
     }
 }
 
+// Save the first element
+$first = array_shift($list);
+// Mark as pinned
+$first['pinned'] = true;
 // Randomize the tiles
 shuffle($list);
+// Put back the first element
+array_unshift($list, $first);
 
 $game = array("w" => $w, "h" => $h, "tiles" => $list);
 

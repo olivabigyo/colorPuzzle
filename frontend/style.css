@@ -19,12 +19,20 @@
     position: absolute;
     border: 1px solid white;
     background-color: aqua;
-    transition: all .5s;
+    transition: all .2s;
 }
 
 .selected {
     transform: scale(1.1);
     z-index: 1000;
+}
+
+.pinned {
+    background-image: url(circle-solid.svg);
+    background-repeat: no-repeat;
+    background-size: 5px;
+    background-position: center;
+
 }
 
 form {
