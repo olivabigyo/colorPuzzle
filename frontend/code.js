@@ -2,7 +2,8 @@
 
 const playground = document.getElementById('canvas');
 
-const apiEndpoint = 'http://localhost/colorPuzzle/backend/server.php';
+// const apiEndpoint = 'http://localhost/colorPuzzle/backend/server.php';
+const apiEndpoint = 'https://amongus.olivabigyo.site/colorPuzzle.php';
 
 document.getElementById('myform').addEventListener('submit', getLevel);
 
