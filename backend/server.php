@@ -16,14 +16,14 @@ $w = $templates[$size]['w'];
 $h = $templates[$size]['h'];
 
 // Static colors - for now
-$colorOrigin = [10, 140, 250];
-$colorRowSteps = [20, 10, -30];
-$colorColumnSteps = [15, 25, -20];
+$colorOrigin = [120, 100, 50];
+$colorRowSteps = [10, -5, -3];
+$colorColumnSteps = [-15, -3, 3];
 
 $list = array();
 
-for ($x = 0; $x < $w; $x++) {
-    for ($y = 0; $y < $h; $y++) {
+for ($y = 0; $y < $h; $y++) {
+    for ($x = 0; $x < $w; $x++) {
         // the right position of the tile
         $tile = array("x" => $x, "y" => $y);
         $color = array(
@@ -32,7 +32,7 @@ for ($x = 0; $x < $w; $x++) {
             $colorOrigin[2] + $colorRowSteps[2] * $y + $colorColumnSteps[2] * $x  //blue
         );
         // color of the tile
-        $tile['color'] = "rgb(" . $color[0] . ", " . $color[1] . ", " . $color[2] . ")";
+        $tile['color'] = "hsl(" . $color[0] . ", " . $color[1] . "%, " . $color[2] . "%)";
         $list[] = $tile;
     }
 }
