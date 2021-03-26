@@ -4,10 +4,23 @@ const playground = document.getElementById('canvas');
 
 const apiEndpoint = 'http://localhost/colorPuzzle/backend/server.php';
 
-async function getGame() {
-    try {
-        const response = await fetch(apiEndpoint);
+document.getElementById('myform').addEventListener('submit', getLevel);
 
+async function getLevel(event) {
+    event.preventDefault();
+    const levelSize = document.getElementById('levels');
+    const reply = await getGame({ 'payload': levelSize.value });
+}
+
+async function getGame(size) {
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(size)
+        });
         if (!response.ok) {
             console.log(`Fetch returned with: ${response.status} (${response.statusText})`);
             return;
@@ -26,8 +39,6 @@ async function getGame() {
         console.log('Error: ' + exception);
     }
 }
-
-getGame();
 
 function initGame(game) {
     const tilewidth = 400 / game.w;

@@ -1,9 +1,20 @@
 <?php
 header('Content-Type: application/json');
 
-// One size fits all - for now
-$w = 4;
-$h = 5;
+$request = json_decode(file_get_contents('php://input'));
+$size = $request->payload;
+
+$templates = array(
+    '1x6' => array("w" => 1, "h" => 6),
+    '3x4' => array("w" => 3, "h" => 4),
+    '3x5' => array("w" => 3, "h" => 5),
+    '4x5' => array("w" => 4, "h" => 5),
+    '5x5' => array("w" => 5, "h" => 5),
+);
+
+$w = $templates[$size]['w'];
+$h = $templates[$size]['h'];
+
 // Static colors - for now
 $colorOrigin = [10, 140, 250];
 $colorRowSteps = [20, 10, -30];

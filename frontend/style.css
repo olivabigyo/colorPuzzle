@@ -26,3 +26,21 @@
     transform: scale(1.1);
     z-index: 1000;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+    width: 400px;
+    font-size: 1.2rem;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+form select {
+    padding: .5rem;
+    margin: .5rem 0;
+}
+form button {
+    padding: .5rem;
+}
