@@ -45,6 +45,7 @@ function initGame(game) {
     const tilewidth = 400 / game.w;
     const tileheight = 500 / game.h;
 
+    playground.innerHTML = '';
     // Creating DOM elements for game object
     for (const tile of game.tiles) {
         const elem = document.createElement('div');
