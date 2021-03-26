@@ -9,10 +9,15 @@ $size = $request->payload;
 
 $templates = array(
     '1x6' => array("w" => 1, "h" => 6),
+    '2x4' => array("w" => 2, "h" => 4),
+    '2x6' => array("w" => 2, "h" => 6),
     '3x4' => array("w" => 3, "h" => 4),
     '3x5' => array("w" => 3, "h" => 5),
+    '3x6' => array("w" => 3, "h" => 6),
     '4x5' => array("w" => 4, "h" => 5),
-    '5x5' => array("w" => 5, "h" => 5),
+    '5x6' => array("w" => 5, "h" => 6),
+    '6x7' => array("w" => 6, "h" => 7),
+    '7x8' => array("w" => 7, "h" => 8),
 );
 
 $w = $templates[$size]['w'];
