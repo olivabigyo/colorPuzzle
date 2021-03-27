@@ -6,29 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Puzzle Game</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <p>Please select difficulty</p>
+    <p>Color Puzzle Game</p>
     <form action="" method="" id="myform">
         <select name="levels" id="levels">
-            <option value="1x6">Level 1: Noob</option>
-            <option value="2x4">Level 2: Intern</option>
-            <option value="2x6">Level 3: Apprentice</option>
-            <option value="3x4">Level 4: Competent</option>
-            <option value="3x5">Level 5: Advanced</option>
-            <option value="3x6">Level 6: Superior</option>
-            <option value="4x5">Level 7: Elite</option>
-            <option value="5x6">Level 8: Master</option>
-            <option value="6x7">Level 9: Genius</option>
-            <option value="7x8">Level 10: God</option>
+            <option value="1x6">Level 1 - Noob</option>
+            <option value="2x4">Level 2 - Intern</option>
+            <option value="2x6">Level 3 - Apprentice</option>
+            <option value="3x4">Level 4 - Competent</option>
+            <option value="3x5">Level 5 - Advanced</option>
+            <option value="3x6">Level 6 - Superior</option>
+            <option value="4x5">Level 7 - Elite</option>
+            <option value="5x6">Level 8 - Master</option>
+            <option value="6x7">Level 9 - Genius</option>
+            <option value="7x8">Level 10 - God</option>
         </select>
         <select name="pins" id="pins">
-            <option value="1">With 1 pin</option>
-            <option value="2">With 2 pins - easier</option>
+            <option value="1">1 pin</option>
+            <option value="2">2 pins - easier</option>
         </select>
-        <button type="submit" id="submit">Go</button>
+        <button type="submit" id="submit">Play</button>
     </form>
     <div id="canvas"></div>
     <button class="help">Cheat</button>

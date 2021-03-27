@@ -9,12 +9,13 @@
 
 body {
     font-size: 1.2rem;
-    font-family: sans-serif;
+    font-family: 'Julius Sans One', sans-serif;
     text-align: center;
+    background-color: rgb(236, 226, 204);
 }
 
 #canvas {
-    margin: 20px auto;
+    margin: 10px auto;
     width: 400px;
     height: 500px;
     position: relative;
@@ -42,26 +43,40 @@ body {
     background-position: center;
 }
 
+p {
+    padding: .5rem;
+}
+
 form {
     display: flex;
     flex-direction: column;
-    margin: 10px auto;
+    margin: 5px auto;
     width: 400px;
 }
 
 form select {
     padding: .5rem;
     margin-bottom: .5rem;
+    border: none;
+    border-radius: 5px;
 }
 
-form button {
-    padding: .5rem;
+form select:focus {
+    outline-color:  rgb(219, 181, 98);
 }
 
-button.help {
+button{
     margin: 0 auto;
     padding: .5rem;
+    background-color: rgb(219, 181, 98);
+    border: none;
+    border-radius: 5px;
     width: 400px;
+}
+
+button:focus {
+    outline-color:  rgb(219, 181, 98);
+
 }
 
 .cheat {
