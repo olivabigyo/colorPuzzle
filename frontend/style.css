@@ -66,3 +66,16 @@ button.help {
 .cheat {
     opacity: .7;
 }
+
+.win {
+    width: 400px;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-image: url(smile-regular.svg);
+    background-repeat: no-repeat;
+    background-size: 350px;
+    background-position: center;
+}

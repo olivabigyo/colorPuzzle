@@ -83,7 +83,7 @@ function initGame(game) {
                     selected = null;
                     if (isWin(game)) {
                         console.log("You won");
-                        setTimeout(() => { alert('Hurray! You won') }, 500);
+                        setTimeout(endgame, 500);
                     } else {
                         console.log("Not yet");
                     }
@@ -132,4 +132,10 @@ function isWin(game) {
         }
     }
     return true;
+}
+
+function endgame() {
+    const check = document.createElement('div');
+    check.classList.add('win');
+    playground.appendChild(check);
 }
