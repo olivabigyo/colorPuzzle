@@ -97,6 +97,19 @@ function initGame(game) {
             tile.elem.classList.add('pinned');
         }
     }
+
+    document.querySelector('.help').addEventListener('click', () => {
+        console.log('help clicked');
+        for (const tile of game.tiles) {
+            console.log('clicky');
+            tile.elem.innerHTML = `${tile.y} - ${tile.x}`;
+            tile.elem.classList.add('cheat');
+            setTimeout(() => {
+                tile.elem.innerHTML = '';
+                tile.elem.classList.remove('cheat');
+            }, 2000);
+        }
+    });
 }
 
 function swap(a, b, ...keys) {
