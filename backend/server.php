@@ -5,7 +5,8 @@ header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
 $request = json_decode(file_get_contents('php://input'));
-$size = $request->payload;
+$size = $request->size;
+$pins = $request->pins;
 
 $templates = array(
     '1x6' => array("w" => 1, "h" => 6),
@@ -79,10 +80,18 @@ for ($y = 0; $y < $h; $y++) {
 $first = array_shift($list);
 // Mark as pinned
 $first['pinned'] = true;
+// In case of two pins
+if ($pins == 2) {
+    $last = array_pop($list);
+    $last['pinned'] = true;
+}
 // Randomize the tiles
 shuffle($list);
 // Put back the first element
 array_unshift($list, $first);
+if ($pins == 2) {
+    array_push($list, $last);
+}
 
 $game = array("w" => $w, "h" => $h, "tiles" => $list);
 

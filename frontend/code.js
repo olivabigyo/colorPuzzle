@@ -10,7 +10,8 @@ document.getElementById('myform').addEventListener('submit', getLevel);
 async function getLevel(event) {
     event.preventDefault();
     const levelSize = document.getElementById('levels');
-    const reply = await getGame({ 'payload': levelSize.value });
+    const pins = document.getElementById('pins');
+    const reply = await getGame({ 'size': levelSize.value, 'pins': pins.value });
 }
 
 async function getGame(size) {

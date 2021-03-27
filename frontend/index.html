@@ -10,8 +10,8 @@
 </head>
 
 <body>
+    <p>Please select difficulty</p>
     <form action="" method="" id="myform">
-        <label for="levels">Please select difficulty</label>
         <select name="levels" id="levels">
             <option value="1x6">Level 1: Noob</option>
             <option value="2x4">Level 2: Intern</option>
@@ -24,10 +24,14 @@
             <option value="6x7">Level 9: Genius</option>
             <option value="7x8">Level 10: God</option>
         </select>
+        <select name="pins" id="pins">
+            <option value="1">With 1 pin</option>
+            <option value="2">With 2 pins - easier</option>
+        </select>
         <button type="submit" id="submit">Go</button>
     </form>
     <div id="canvas"></div>
-    <button class="help">Please help</button>
+    <button class="help">Cheat</button>
     <script src="code.js"></script>
 </body>
 
