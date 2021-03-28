@@ -8,7 +8,7 @@ $request = json_decode(file_get_contents('php://input'));
 $size = $request->size;
 $pins = $request->pins;
 
-$templates = array(
+$template_size = array(
     '1x6' => array("w" => 1, "h" => 6),
     '2x4' => array("w" => 2, "h" => 4),
     '2x6' => array("w" => 2, "h" => 6),
@@ -21,8 +21,17 @@ $templates = array(
     '7x8' => array("w" => 7, "h" => 8),
 );
 
-$w = $templates[$size]['w'];
-$h = $templates[$size]['h'];
+$w = $template_size[$size]['w'];
+$h = $template_size[$size]['h'];
+
+$template_pin = array(
+    '1' => array("fromfirstrow" => 1, "fromlastrow" => 0),
+    '2' => array("fromfirstrow" => 1, "fromlastrow" => 1),
+    '3' => array("fromfirstrow" => $w, "fromlastrow" => $w),
+);
+
+$frow = $template_pin[$pins]['fromfirstrow'];
+$lrow = $template_pin[$pins]['fromlastrow'];
 
 class ColorVector
 {
@@ -51,9 +60,7 @@ class ColorVector
     }
 }
 
-
-// Static colors - for now
-// $colorOrigin = new ColorVector(120, 100, 50);
+// Randomized colors
 $colorOrigin = ColorVector::generateVertex();
 $colorRowSteps = new ColorVector(rand(-20, 20), -5, -3);
 $colorColumnSteps = new ColorVector(rand(-20, 20), -3, 3);
@@ -76,25 +83,31 @@ for ($y = 0; $y < $h; $y++) {
     }
 }
 
-// Save the first element
-$first = array_shift($list);
-// Mark as pinned
-$first['pinned'] = true;
-// In case of two pins
-if ($pins == 2) {
-    $last = array_pop($list);
-    $last['pinned'] = true;
-}
-// Randomize the tiles
-shuffle($list);
-// Put back the first element
-array_unshift($list, $first);
-if ($pins == 2) {
-    array_push($list, $last);
+// Save the elements to be marked as pinned
+// Remove the first or first row of elements and mark
+for ($x = 0; $x < $frow; $x++) {
+    $firstRow[] = array_shift($list);
+    $firstRow[$x]['pinned'] = true;
 }
 
+// Remove the last or last row of elements and mark
+for ($x = 0; $x < $lrow; $x++) {
+    $lastRow[] = array_pop($list);
+    $lastRow[$x]['pinned'] = true;
+}
+
+// Randomize the rest of tiles
+shuffle($list);
+
+// Put back the saved and marked elements
+array_unshift($list, ...$firstRow);
+$lastRowOK = array_reverse($lastRow);
+array_push($list, ...$lastRowOK);
+
+// create game object
 $game = array("w" => $w, "h" => $h, "tiles" => $list);
 
+// create response json
 echo json_encode(array(
     "ok" => true,
     "game" => $game
