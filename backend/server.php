@@ -85,12 +85,14 @@ for ($y = 0; $y < $h; $y++) {
 
 // Save the elements to be marked as pinned
 // Remove the first or first row of elements and mark
+$firstRow = array();
 for ($x = 0; $x < $frow; $x++) {
     $firstRow[] = array_shift($list);
     $firstRow[$x]['pinned'] = true;
 }
 
 // Remove the last or last row of elements and mark
+$lastRow = array();
 for ($x = 0; $x < $lrow; $x++) {
     $lastRow[] = array_pop($list);
     $lastRow[$x]['pinned'] = true;
